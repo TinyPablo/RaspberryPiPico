@@ -1,0 +1,4 @@
+my raspberry pi pico / pico w projects
+lib contains my libraries for pico
+status: works
+also it is a github repository

@@ -1,13 +1,17 @@
 import time
 import network
 
-class NetworkConnection:
-    def __init__(self, _ssid: str, _password: str):
+
+class Connection:
+    def __int__(self, _ssid: str, _password: str):
         self.ssid = _ssid
         self.password = _password
+
         self.wlan: network.WLAN = None
-        self.status = None
-        self.ip = None
+        self.connect()
+
+        self.status[list] = []
+        self.ip: str = None
 
     def connect(self):
         self.wlan = network.WLAN(network.STA_IF)
@@ -27,5 +31,5 @@ class NetworkConnection:
         self.status = self.wlan.ifconfig()
         self.ip = self.status[0]
         print('IP: ' + self.ip)
-        
-        return self.status
+
+connection = Connection('pawelinternet', 'internetpawla')

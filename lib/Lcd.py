@@ -31,13 +31,11 @@ class Lcd:
         if self.debug:
             print('cleared')
             
-    def backlight_on(self):
-        self.lcd.backlight_on()
+    def set_backlight(self, __value: bool):
+        if __value:
+            self.lcd.backlight_on()
+        if not __value:
+            self.lcd.backlight_off()
         if self.debug:
-            print('backlight on')
-            
-    def backlight_off(self):
-        self.lcd.backlight_off()
-        if self.debug:
-            print('backlight off')
+            print('backlight value: ' + __value)
 

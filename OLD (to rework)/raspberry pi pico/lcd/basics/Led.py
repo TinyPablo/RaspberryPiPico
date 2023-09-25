@@ -1,5 +1,6 @@
 from machine import Pin
 
+
 class Led:
     def __init__(self, pin: int, debug=False):
         self.pin = pin
@@ -9,14 +10,13 @@ class Led:
     def print_led_state(self):
         print('led on pin ' + str(self.pin) + ' is ' + ('ON' if self.led.value() else 'OFF'))
 
-    def value(self, __value=None):
-        if __value is not None:
-            self.led.value(__value)
-            if self.debug:
-                self.print_led_state()
-        return self.led.value()
-
-    def toggle(self):
-        self.led.toggle()
+    def value(self, __value: bool):
+        self.led.value(__value)
         if self.debug:
             self.print_led_state()
+
+    def toggle(self):
+        self.led.toggle()  # noqa
+        if self.debug:
+            self.print_led_state()
+

@@ -1,0 +1,23 @@
+import time
+import usb_hid
+from adafruit_hid.mouse import Mouse
+import board
+import digitalio
+
+mouse = Mouse(usb_hid.devices)
+led = digitalio.DigitalInOut(board.GP25)
+led.direction = digitalio.Direction.OUTPUT
+
+led.value = False
+time.sleep(5)
+mouse.move(y=400)
+
+while True:
+    click = 500
+    while click > 0:
+        led.value = 
+        mouse.click(Mouse.LEFT_BUTTON)
+        time.sleep(.01)
+        click -= 1
+    led.value = False
+    time.sleep(15)

